@@ -2,9 +2,10 @@
 
 require 'sinatra'
 
-get '/join' do
-	"회원가입 페이지 입니다."
+get '/mining' do
+	"<h1 style='text-align:center'>마이닝 페이지 입니다.</h1>"
+end
 
-get '/logout' do
-	"로그아웃 하셨습니다."
+get '/transaction' do
+	"<h1 style='text-align:center'>트랜잭션 확인 페이지 입니다.</h1>"
 end
