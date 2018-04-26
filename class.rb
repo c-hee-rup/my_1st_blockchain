@@ -1,3 +1,5 @@
+require 'digest'
+
 class Blockchain
 	
 	def initialize
@@ -8,9 +10,10 @@ class Blockchain
 		@number_of_blocks = @number_of_blocks + 1
 		history = []
 		begin
-			nonce = rand(100)
+			nonce = rand(1000000)
+			hashed = Digest::SHA256.hexdigest(nonce.to_s)
 			history << nonce
-		end while nonce != 0
+		end while hashed[0..3] != '0000'
 		history
 	end
 
