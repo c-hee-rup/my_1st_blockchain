@@ -9,6 +9,5 @@ get '/' do
 end
 
 get '/mine'do
- b.mining
- "마이닝을 하였습니다."
+ b.mining.to_s
 end

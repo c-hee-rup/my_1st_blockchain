@@ -9,7 +9,7 @@ class Blockchain
 		history = []
 		begin
 			nonce = rand(100)
-			history < < nonce
+			history << nonce
 		end while nonce != 0
 		history
 	end
