@@ -10,8 +10,8 @@ class Blockchain
 		begin
 			nonce = rand(100)
 			history < < nonce
-			history.push(nonce)
 		end while nonce != 0
+		history
 	end
 
 	def my_blocks
