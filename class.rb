@@ -17,4 +17,9 @@ class Blockchain
 		}
 		@chain << block
 	end
+
+	def current_chain
+		@chain
+	end
+	
 end

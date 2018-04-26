@@ -5,9 +5,10 @@ b = Blockchain.new
 
 
 get '/' do
- "전체 블록수는 : " + b.my_blocks.to_s
+ b.current_chain.to_s
 end
 
 get '/mine'do
- b.mining.to_s
+ b.mining
+ "블럭찾았다!"
 end
