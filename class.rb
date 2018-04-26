@@ -3,30 +3,18 @@ require 'digest'
 class Blockchain
 	
 	def initialize
-		@number_of_blocks = 1
+		@chain = []
 	end
 
 	def mining
-		@number_of_blocks = @number_of_blocks + 1
-		history = []
-		if @number_of_blocks < 100
 		begin
-			nonce = rand(1000000)
-			hashed = Digest::SHA256.hexdigest(nonce.to_s)
-			history << nonce
-		end while hashed[0..1] != '00'
-		history
-		if @number_of_blocks > 200
-		begin
-			nonce = rand(1000000)
-			hashed = Digest::SHA256.hexdigest(nonce.to_s)
-			history << nonce
-		end while hashed[0..3] != '0000'
-		history
-	end
+			nonce = rand(100)
+		end while nonce != 0
 
-	def my_blocks
-		@number_of_blocks
+		block = {
+			'index' => @chain.length + 1,
+			'time' => Time.now.to_i
+		}
+		@chain << block
 	end
-
 end
