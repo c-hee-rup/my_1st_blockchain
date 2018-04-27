@@ -19,8 +19,6 @@ end
 message
 end
 
-
 get '/mine'do
-	"<center><h1>nonce 값을 찾았습니다.</h1></center>" + b.mining.to_s
-
+ "<h1><center>nonce 값을 찾았습니다.</center></h1>" + b.mining.to_s
 end
