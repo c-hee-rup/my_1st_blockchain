@@ -7,9 +7,11 @@ class Blockchain
 	end
 
 	def mining
+		history = []
 		begin
 			nonce = rand(1000000)
 			hashed = Digest::SHA256.hexdigest(nonce.to_s)
+			history << nonce
 		end while hashed[0..1] != '00'
 
 		block = {
@@ -19,6 +21,8 @@ class Blockchain
 			'previous_block' => Digest::SHA256.hexdigest(last_block.to_s)
 		}
 		@chain << block
+		history
+
 	end
 
 	def current_chain

@@ -1,5 +1,6 @@
 require 'sinatra'
 require './class'
+#encoding: UTF-8 
 
 b = Blockchain.new
 
@@ -20,6 +21,6 @@ end
 
 
 get '/mine'do
- b.mining
- "블럭찾았다!"
+	"<center><h1>nonce 값을 찾았습니다.</h1></center>" + b.mining.to_s
+
 end
