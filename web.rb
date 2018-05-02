@@ -15,17 +15,17 @@ get '/' do
 		message << "<hr>"	
 end
 
-	message<< "</center>"
+	message << "</center>"
 	message
 end
 
 
 get '/mine'do
- b.mining.to_s
+ 	b.mining.to_s
 end
 
+
 get '/trans'do
-	b.make_a_trans
-	params["sender"] + params["recv"] + params["amount"]
+	b.make_a_trans(params["sender"], params["recv"], params["amount"])
 end
 
