@@ -6,6 +6,10 @@ class Blockchain
 		@chain = []
 	end
 
+	def make_a_trans
+	end
+	
+
 	def mining
 		begin
 			nonce = rand(1000000)

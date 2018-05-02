@@ -15,11 +15,17 @@ get '/' do
 		message << "<hr>"	
 end
 
-message
+	message<< "</center>"
+	message
 end
 
 
 get '/mine'do
- b.mining
- "블럭찾았다!"
+ b.mining.to_s
 end
+
+get '/trans'do
+	b.make_a_trans
+	params["sender"] + params["recv"] + params["amount"]
+end
+
