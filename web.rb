@@ -1,24 +1,41 @@
 require 'sinatra'
 require './class'
-#encoding: UTF-8 
+#encoding: UTF-8
 
 b = Blockchain.new
 
 
 get '/' do
-	message = ""
-	b.current_chain.each do |c|
-		message << "번호는" + c['index'].to_s + "입니다.<br>"
-		message << "Nonce" + c['nonce'].to_s + "입니다.<br>"
-		message << "시간은" + c['time'].to_s + "입니다.<br>"
-		message << "이전 주소는" + c['previous_block'].to_s + "입니다.<br>"
-		message << "내 주소는" + Digest::SHA256.hexdigest(c.to_s) + "입니다.<br>"
+	message = "<center>"
+
+	b.all_chains.each do |c|
+		message << "Block number :" + c["nHeight"].to_s + "<br>"
+		message << "Nonce :" + c["nNonce"].to_s + "<br>"
+		message << "Timestamp :" + c["nTime"].to_s + "<br>"
+		message << "Previous address :" + c["previous_address"].to_s + "<br>"
+		message << "Hash :" + Digest::SHA256.hexdigest(c.to_s) + "<br>"
+		message << "Transactions :" +c["transactions"].to_s + "<br>"
 		message << "<hr>"	
 end
 
-message
+	message << "</center>"
+	message
 end
 
 get '/mine'do
- "<h1><center>nonce 값을 찾았습니다.</center></h1>" + b.mining.to_s
+	b.mining.to_s
 end
+
+
+get '/trans'do
+	b.make_a_trans(params["sender"], params["recv"], params["amount"]).to_s
+end
+
+get '/new_wallet' do
+	b.make_a_new_wallet.to_s
+end
+
+get '/all_wallet' do
+	b.show_all_wallet.to_s
+end
+

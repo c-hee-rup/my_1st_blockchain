@@ -12,3 +12,8 @@ class Dog
  end
 end
 
+class Dog
+	def initialize
+		@weight = 0.5
+	end
+	
