@@ -8,6 +8,7 @@ class Blockchain
 		@chain = []
 		@trans = []
 		@wallet ={}
+		@node = []
 	end
 
 	def make_a_new_wallet
@@ -70,6 +71,16 @@ class Blockchain
 	end
 	
 	def ask_other_block
-		HTTParty.get("http://localhost:4567/number_of_blocks")
+		message = []
+		@node.each do |n|
+			message << HTTParty.get("http://localhost:" + n + "/number_of_blocks").body
+		end
+	message
+	end
+
+	def add_node(node)
+		@node << node
+		@node.uniq!
+		@node
 	end
 end

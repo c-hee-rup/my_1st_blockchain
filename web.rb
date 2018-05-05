@@ -14,6 +14,11 @@ get '/ask' do
 	b.ask_other_block.to_s
 end
 
+get '/add_node' do
+	b.add_node(params["node"])
+end
+
+
 
 get '/' do
 	message = "<center>"
