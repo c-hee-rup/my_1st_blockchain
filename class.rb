@@ -71,11 +71,14 @@ class Blockchain
 	end
 	
 	def ask_other_block
-		message = []
+		
 		@node.each do |n|
-			message << HTTParty.get("http://localhost:" + n + "/number_of_blocks").body
+			other_block = HTTParty.get("http://localhost:" + n + "/number_of_blocks")
+
+			if @chain.size < other_block.to_i
+				@chain = []
+			end
 		end
-	message
 	end
 
 	def add_node(node)
@@ -84,3 +87,4 @@ class Blockchain
 		@node
 	end
 end
+
