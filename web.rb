@@ -1,6 +1,8 @@
+#encoding: UTF-8
+
 require 'sinatra'
 require './class'
-#encoding: UTF-8
+
 
 b = Blockchain.new
 
