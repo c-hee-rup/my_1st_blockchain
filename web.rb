@@ -24,8 +24,6 @@ get '/add_node' do
 	b.add_node(params["node"])
 end
 
-
-
 get '/' do
 	message = "<center>"
 	b.all_chains.each do |c|
