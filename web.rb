@@ -13,6 +13,7 @@ end
 get '/recv' do
 	recv_block = JSON.parse(params["blocks"])
 	b.recv(recv_block)
+	b.all_chains.to_json
 end
 
 
