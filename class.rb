@@ -1,5 +1,6 @@
 require 'digest'
 require 'securerandom'
+require 'httparty'
 
 class Blockchain
 	
@@ -63,7 +64,12 @@ class Blockchain
 	def last_block
 		@chain[-1]
 	end
+	
 	def all_chains
 		@chain
+	end
+	
+	def ask_other_block
+		HTTParty.get("http://localhost:4567/number_of_blocks")
 	end
 end
