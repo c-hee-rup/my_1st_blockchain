@@ -1,6 +1,5 @@
 require 'digest'
 require 'securerandom'
-require 'httparty'
 
 class Blockchain
 	
@@ -8,7 +7,6 @@ class Blockchain
 		@chain = []
 		@trans = []
 		@wallet ={}
-		@node = []
 	end
 
 	def make_a_new_wallet
@@ -57,7 +55,7 @@ class Blockchain
 			"nNonce" => nonce,
 			"previous_address" => Digest::SHA256.hexdigest(last_block.to_s),
 			"transactions" => @trans,
-			"block" => @chain << block
+			"block" => @chain
 		}
 		@trans = []
 		@chain << block
@@ -66,35 +64,7 @@ class Blockchain
 	def last_block
 		@chain[-1]
 	end
-	
 	def all_chains
 		@chain
 	end
-
-	def recv(blocks)
-		blocks.each do |b|
-			@chain << b
-		end
-		@chain
-	end
-	
-	def ask_other_block
-		
-		@node.each do |n|
-			other_block = HTTParty.get("http://localhost:" + n + "/number_of_blocks")
-
-			if @chain.size < other_block.to_i
-				jsoned_chain = @chain.to_json
-				full_chain = HTTParty.get("http://localhost:" + n + "/recv?blocks=" + jsoned_chain).body
-				@chain = JSON.parse(full_chain)
-			end
-		end
-	end
-
-	def add_node(node)
-		@node << node
-		@node.uniq!
-		@node
-	end
 end
-
