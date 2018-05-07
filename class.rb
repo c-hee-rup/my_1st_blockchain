@@ -54,7 +54,8 @@ class Blockchain
 			"nTime" => Time.now.to_i,
 			"nNonce" => nonce,
 			"previous_address" => Digest::SHA256.hexdigest(last_block.to_s),
-			"transactions" => @trans
+			"transactions" => @trans,
+			"block" => @chain << block
 		}
 		@trans = []
 		@chain << block

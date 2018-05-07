@@ -23,7 +23,16 @@ end
 end
 
 get '/mine'do
-	b.mining.to_s
+	message = "<center>"
+
+	b.mining.each do |d|
+		message << d["block"].to_s + "<br>"
+		message << "<hr>"
+
+end
+
+	message << "</center>"
+	message
 end
 
 
@@ -38,4 +47,3 @@ end
 get '/all_wallet' do
 	b.show_all_wallet.to_s
 end
-
