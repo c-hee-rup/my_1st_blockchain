@@ -20,8 +20,8 @@ Telegram::Bot::Client.run(token) do |bot|
   parsed_price = JSON.parse(total_price)
   target_price = parsed_price["price"]
   float_price = target_price.to_f
-  final_price = float_price.round(2)
-  msg_price = "현재 이더리움 가격은" + final_price.to_s + "달러입니다."
+  final_price = float_price.round(0)
+  msg_price = "현재 이더리움 가격은" + final_price.to_s.reverse.gsub(/...(?=.)/,'\&,').reverse + "달러입니다."
 
 
   url = 'http://api.fixer.io/latest?base=USD'
@@ -30,7 +30,7 @@ Telegram::Bot::Client.run(token) do |bot|
   parsed_rate = JSON.parse(rate)
   final_rate = parsed_rate["rates"]["KRW"]
 
-  msg_price << "\nKRW : " + (float_price * final_rate.to_f).round(0).to_s + "만원"
+  msg_price << "\nKRW : " + (float_price * final_rate.to_f).round(0).to_s.reverse.gsub(/...(?=.)/,'\&,').reverse + "원"
 
   url = 'https://crix-api-cdn.upbit.com/v1/crix/candles/minutes/30?code=CRIX.UPBIT.KRW-ETH'
   upbit_price = HTTParty.get(url).body
@@ -41,7 +41,7 @@ Telegram::Bot::Client.run(token) do |bot|
 
 kp = ((float_final_upbit_price - float_price * final_rate.to_f) / (float_price * final_rate.to_f)) * 100
 
-    msg_price << "\nPremium : " + kp.round(2).to_s + "%"
+    msg_price << "\nPremium : " + kp.round(0).to_s.reverse.gsub(/...(?=.)/,'\&,').reverse + "%"
 
 
       bot.api.send_message(chat_id: message.chat.id, text: msg_price)
